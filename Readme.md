@@ -91,14 +91,9 @@ And done. Press ctrl-z to get out.
 	
 You need to be in the folder which contains manage.py file
 
-```
-python manage.py makemigrations
-```
-
-or
 
 ```
-python manage.py toy makemigrations
+python manage.py makemigrations toy
 ```
 
 Now migrate using:
