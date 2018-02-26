@@ -62,13 +62,62 @@ cd Toy-Task
 #### Install all other dependencies
 
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
+Now you need to add your mysql username, password in toyTask/settings.py file.
+
+#### Adding Database to mysql
+
+	Type
+	```
+	mysql -u your-username -p your-password
+	```
+	This will open Mysql console
+
+	Now add the Database name toyTask by typing
+	```
+	Create Database toyTask;
+	```
+
+	And done.Press ctrl-z to get out .
+
+#### Migrations
+	```
+	python manage.py makemigrations
+	```
+	or
+	```
+	python manage.py toy makemigrations
+	```
+
+	Now migrate using:
+
+	```
+	python manage.py migrate
+	```
+
+#### Adding data using Faker.
+
+	As Faker is already installed 
+	Use below command to add some data into the table.
+
+	```
+	python manage.py seed toy --number=50
+	```
+
+#### Open the webapp
+
+	Run
+	```
+	python manage.py runserver
+	```
+	Holaa you can open the chart in the browser using given address.
+	
 
 
 
 
-'''
-python manage.py seed toy --number=15
-'''
+
+
+
