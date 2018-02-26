@@ -128,7 +128,7 @@ Holaa you can open the graph,chart in the browser using given address.
 ## Built With
 
 * [Django](https://www.djangoproject.com/) - The web framework used
-* [Highcharts](https://www.highcharts.com/) - To draw chart
+* [Highcharts](https://www.highcharts.com/) - To draw graph
 * [Jquery](https://jquery.com/) - Used to Draw graph
 
 

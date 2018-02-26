@@ -1,0 +1,4 @@
+*.pyc
+toy/*pyc
+toyTask/*.pyc
+toy/migrations
