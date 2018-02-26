@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bubble charts</title>
+   
+</head>
+   <body>
+      <div id="container" style="width: 700px; height: 600px; margin: 0 auto"></div>
+      <button id="updateLegend">Click me for normal</button>
+     
+
+
+
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+   <script src="http://code.highcharts.com/highcharts.js"></script>
+   <script src="http://code.highcharts.com/highcharts-more.js"></script>
+   <script language="JavaScript">
+$(function () {
+	console.log("I am here");
+  jQuery.extend({
+    getValues: function(url) {
+        var result = null;
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                result = data["Success"];
+            }
+        });
+       return result;
+    }
+});			
+// var data1 = { "Success":[
+						//[
+// 						[axis],
+// 						[
+// 							[95,95],[86.5,102.9],null,[95,95],[63.4,51.8],null
+// 						]
+// 				]
+// 				[
+// 						[axis],
+// 						[
+// 							[80.3,86.1],[78.4,70.1],null,[80.3,86.1],[65.5,126.4],null,[80.3,86.1],[64,82.9]
+// 						]
+// 				]
+// 			]
+// 			}
+var results = $.getValues("/data");
+var mentions = $.getValues("/mentionedin");
+var Xmin = $.getValues("/minimumyear");
+
+console.log(mentions);
+	var chart = Highcharts.chart('container',{
+	        chart: {
+	            type: 'bubble',
+	            plotBorderWidth: 1,
+	            zoomType: 'xy',
+
+	        },
+	        legend: {
+	            enabled: false
+	        },
+	        title: {
+	            text: 'Toy Task'
+	        },
+	        xAxis: {
+	            gridLineWidth: 1,
+	            title: {
+	                text: 'Year'
+	            },
+	            labels: {
+	                format: '{value}'
+	            },
+	            floor: Xmin[0]+4,
+	            ceiling: Xmin[1]+1,
+	        },
+	        yAxis: {
+	            startOnTick: false,
+	            endOnTick: false,
+	            gridLineWidth: 1,
+	            
+	            title: {
+	                text: 'Months'
+	            },
+	            labels: {
+	                format: '{value}'
+	            },
+	            maxPadding: 0.2,
+	        },
+
+	        	plotOptions:{
+	        		bubble:{
+	        			animation:false,
+	        			pointStart:Xmin,
+	        			cursor :"pointer",
+	        			point:{
+	        					events: {
+							            mouseOver: function (e) {
+							                // find the clicked values and the series
+							                var chart1 = this.series.chart;
+							                var x = this.x,
+							                y = this.y,
+							                z = this.z;
+							           		var Flen = chart.series.length
+							              			if (Flen >0){
+							              				for(var i = Flen - 1; i > 0; i--){
+							              					chart.series[i].remove();
+							              				}
+							                   }
+
+							           		var arrayLength = mentions.length;
+											for (var i = 0; i < arrayLength; i++) {
+												for(var j = 0; j < mentions[i][1].length;j++){
+										                if(x == mentions[i][0][0] && y == mentions[i][0][1])
+										                {						               	    
+										                chart.addSeries({type:"line",lineWidth:.5,id:"series-1",color:'black',data:mentions[i][1], animation: false});
+
+										    //             $.each(chart.series[0].data, function(i, point) {
+														//     point.graphic.attr({
+														//         fill: '#FFFFFF'
+														//     });
+														// });
+										                 // chart.series.redraw();
+										                 console.log("redrawn")
+
+										                    }
+
+							                }
+							              }
+							            },
+
+							        },
+							    },
+
+							    events :{
+							              mouseOut: function (e) {
+							              		var Flen = chart.series.length
+							              			if (Flen >0){
+							              				console.log("removed");
+							              				console.log(chart.series);
+							                       chart.get("series-1").remove();
+							                       console.log(chart.series);
+							                  			}
+
+							                  		else{
+							                  			console.log("noproblem");
+							                  		}
+				               									 }
+
+							        },
+							        // events: {
+							             //    mouseOut: function () {
+							             //        if (this.series.chart.lbl) {
+							             //            this.series.chart.lbl.hide();
+							                        
+							             //        }
+				                // }
+				           //  }
+	        			}
+	        		},
+
+	        	
+	           
+
+				        
+				tooltip: {
+	            useHTML: true,
+	            headerFormat: '<table>',
+	            pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
+	                '<tr><th>Year:</th><td>{point.x}</td></tr>' +
+	                '<tr><th>Month:</th><td>{point.y}</td></tr>' 
+	                // +'<tr><th>Mentions:</th><td>{point.z}</td></tr>'
+	                ,
+	            footerFormat: '</table>',
+	            followPointer: true
+	        },
+	        
+
+	        series: [{
+	        	name: 'Bubble',
+	            data: results,
+	             marker: {
+              fillOpacity:.9
+            },
+	        
+	        },
+	     
+],
+	    });
+
+
+			$('#updateLegend').on('click', function (e) {
+          var Flen = chart.series.length
+										    console.log(Flen)
+							              			if (Flen >0){
+							              				console.log("removed");
+							              				
+							              				for(var w = Flen - 1; w > 0; w--){
+							              					console.log("deleted");
+							              					chart.series[w].remove();
+							              					console.log("deleted done");
+							              				}
+							                       
+							                       
+							                  			}
+
+        
+
+    						});
+
+			});
+
+
+</script>
+   </body>
+   
+</html>
