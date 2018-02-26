@@ -11,7 +11,9 @@ These instructions will get you a copy of the project up and running on your loc
 This project backend is build with django.So we need to install it first.
 In order to remove conflict of our project with your running system we will use virtual environment in this project.
 
-You need to have python up and running in your Unix system.
+You need to have python and Mysql already installed and running in your Unix system.If not install them using the official 
+websites
+
 
 ####Install pip first
 '''
@@ -39,8 +41,21 @@ source source/bin/activate
 
 ###Clone this git repo
 '''
-git clone 
+git clone https://github.com/abhishek981996/Toy-Task.git
 '''
+
+go inside the repo using cd.
+'''
+cd Toy-Task
+'''
+
+####Install all other dependencies
+
+'''
+pip install -r requirement.txt
+'''
+
+
 
 
 '''
