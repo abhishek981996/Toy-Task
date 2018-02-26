@@ -71,58 +71,59 @@ Open settings.py(using cd) and do the necessary changes in mysql username passwo
 
 #### Adding Database toyTask to mysql:
 
-	Type
+Type
 
-	```
-	mysql -u your-username -p your-password
-	```
+```
+mysql -u your-username -p your-password
+```
 	
-	This will open Mysql console
+This will open Mysql console
 
-	Now add the Database name toyTask by typing
+Now add the Database name toyTask by typing
 	
-	```
-	Create Database toyTask;
-	```
+```
+Create Database toyTask;
+```
 
-	And done. Press ctrl-z to get out.
+And done. Press ctrl-z to get out.
 
 #### Migrations
 	
-	You need to be in the folder which contains manage.py file
+You need to be in the folder which contains manage.py file
 
-	```
-	python manage.py makemigrations
-	```
-	or
+```
+python manage.py makemigrations
+```
 
-	```
-	python manage.py toy makemigrations
-	```
+or
 
-	Now migrate using:
+```
+python manage.py toy makemigrations
+```
 
-	```
-	python manage.py migrate
-	```
+Now migrate using:
+
+```
+python manage.py migrate
+```
 
 #### Adding data using Faker.
 
-	As Faker is already installed while installing all the dependencies.
-	Use below command to add some data into the toyTask Database.
+As Faker is already installed while installing all the dependencies.
+Use below command to add some data into the toyTask Database.
 
-	```
-	python manage.py seed toy --number=50
-	```
+```
+python manage.py seed toy --number=50
+```
 
 #### Open the webapp
 
-	Run
+Run
 
-	```
-	python manage.py runserver
-	```
-	Holaa you can open the graph,chart in the browser using given address.
+```
+python manage.py runserver
+```
+Holaa you can open the graph,chart in the browser using given address.
 	
 ## Built With
 
