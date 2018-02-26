@@ -6,7 +6,7 @@ from django.db import models
 
 class Cases(models.Model):
 
-	caseTitle = models.CharField(max_length=10)
+	caseTitle = models.CharField(max_length=50)
 	DOJ = models.DateField()
 	body = models.TextField()
 	def __str__(self):

@@ -80,10 +80,15 @@ def MinimumYear(request):
 	"""
 	cases = Cases.objects.all()
 	year = []
+	imax = -1
 	for case in cases:
 		date = datetime.datetime.strptime(str(case.DOJ), "%Y-%m-%d")
 		year.append(date.year)
-	data = [sorted(year)[0],sorted(year)[-1]]
+		mentions = Mentions.objects.filter(caseId = case).count()
+		if imax<mentions:
+			imax = mentions
+
+	data = [sorted(year)[0],sorted(year)[-1],imax]
 	return JsonResponse({'Success':data})
 
 

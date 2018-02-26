@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bubble charts</title>
+<title>Bubble charts Task</title>
    
 </head>
    <body>
-      <div id="container" style="width: 700px; height: 600px; margin: 0 auto"></div>
-      <button id="updateLegend">Click me for normal</button>
-     
+      <div id="container" style="width: 700pxpushing the height: 600px; margin: 0 auto"></div>
+      <button id="updateLegend" style="text-align: center;" >Click me for normal</button>
 
-
-
-
+      <ul>
+      	<li><p style="font-weight:bold;">You can zoom the area by Clicking and pushing it forward or backward </p> </li>
+      	<li><p style="font-weight:bold;">The size of the bubble determines the mentions in it </p> </li>
+      	<li><p style=" font-weight:bold;">The line which appear on hover describes the self.name which is mentioned in other bubbles </p> </li>
+      </ul>
+      
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
    <script src="http://code.highcharts.com/highcharts.js"></script>
    <script src="http://code.highcharts.com/highcharts-more.js"></script>
-   <script language="JavaScript">
-$(function () {
+
+
+
+   <script  type="text/javascript" charset="utf-8" >
+   	$(function () {
 	console.log("I am here");
   jQuery.extend({
     getValues: function(url) {
@@ -33,26 +38,12 @@ $(function () {
        return result;
     }
 });			
-// var data1 = { "Success":[
-						//[
-// 						[axis],
-// 						[
-// 							[95,95],[86.5,102.9],null,[95,95],[63.4,51.8],null
-// 						]
-// 				]
-// 				[
-// 						[axis],
-// 						[
-// 							[80.3,86.1],[78.4,70.1],null,[80.3,86.1],[65.5,126.4],null,[80.3,86.1],[64,82.9]
-// 						]
-// 				]
-// 			]
-// 			}
 var results = $.getValues("/data");
 var mentions = $.getValues("/mentionedin");
 var Xmin = $.getValues("/minimumyear");
+var floors = Xmin[0] -.5,
+	ceilings = Xmin[1] +.5;
 
-console.log(mentions);
 	var chart = Highcharts.chart('container',{
 	        chart: {
 	            type: 'bubble',
@@ -74,8 +65,8 @@ console.log(mentions);
 	            labels: {
 	                format: '{value}'
 	            },
-	            floor: Xmin[0]+4,
-	            ceiling: Xmin[1]+1,
+	            floor: floors, //can be added with highest no of mentions for better result
+	            ceiling: ceilings,//can be added with highest no of mentions for better result
 	        },
 	        yAxis: {
 	            startOnTick: false,
@@ -123,9 +114,7 @@ console.log(mentions);
 														//         fill: '#FFFFFF'
 														//     });
 														// });
-										                 // chart.series.redraw();
-										                 console.log("redrawn")
-
+										                 // chart.series.redraw()
 										                    }
 
 							                }
@@ -140,9 +129,7 @@ console.log(mentions);
 							              		var Flen = chart.series.length
 							              			if (Flen >0){
 							              				console.log("removed");
-							              				console.log(chart.series);
 							                       chart.get("series-1").remove();
-							                       console.log(chart.series);
 							                  			}
 
 							                  		else{
@@ -214,7 +201,7 @@ console.log(mentions);
 			});
 
 
-</script>
+   </script>
    </body>
    
 </html>

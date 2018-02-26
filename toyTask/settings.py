@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
+MAIN_PROJECT= os.path.dirname(__file__)
 # Application definition
 
 INSTALLED_APPS = [
@@ -123,5 +124,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+STATIC_ROOT = ''
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(MAIN_PROJECT, 'static'),
+)
