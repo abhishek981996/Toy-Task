@@ -13,7 +13,8 @@ def Index(request):
 
 
 def Data(request):
-
+	""" Api build for sending Bubble data
+	This Api is used to create bubble """
 	cases = Cases.objects.all()
 	data = []
 	for case in cases:
@@ -29,6 +30,7 @@ def Data(request):
 def MentionedIN(request):
 
 	"""
+	Build to draw line for mentionedIn
 	this function returns below format json
 	{ "Success":[
 						//[
