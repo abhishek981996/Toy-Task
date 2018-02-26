@@ -1,1 +1,3 @@
 *.pyc
+toy/*pyc
+toyTask/*.pyc
